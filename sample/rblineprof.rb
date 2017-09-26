@@ -12,9 +12,9 @@ end
 
 class C
   def hi(greeting)
-    puts greeting
+    puts greeting + yield
   end
   measure_its :hi, with: [:rblineprof]
 end
 
-C.new.hi('こんにちは！')
+C.new.hi('こんにちは！') { '世界' }
