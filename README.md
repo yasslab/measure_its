@@ -21,12 +21,31 @@ Or install it yourself as:
 ## Usage
 
 ```rb
+require 'measure_its'
+using MeasureIts
+
+# or
+
+require 'measure_its/core_ext'
+
+# define the measure strategy
+require 'rblineprof'
+MeasureIts.add_strategy(:rblineprof) do |&block|
+  puts :begin
+  prof = lineprof(/./) { block.call }
+  p prof
+  puts :end
+end
+
+# measure_its method_name, with: [strategy1, strategy2, ...]
 class C
   def heavy_job
     # ...
   end
   measure_its :heavy_job, with: [:rblineprof]
 end
+
+C.new.heavy_job
 ```
 
 ## Development
