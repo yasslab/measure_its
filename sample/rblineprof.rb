@@ -11,10 +11,10 @@ MeasureIts.add_strategy(:rblineprof) do |&block|
 end
 
 class C
-  def hi
-    puts :hi
+  def hi(greeting)
+    puts greeting
   end
   measure_its :hi, with: [:rblineprof]
 end
 
-C.new.hi
+C.new.hi('こんにちは！')
